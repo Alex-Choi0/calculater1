@@ -1,10 +1,10 @@
 const calculator = document.querySelector('.calculator'); // calculator 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 const buttons = calculator.querySelector('.calculator__buttons'); // calculator__keys 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 
-const firstOperend = document.querySelector('.calculator__operend--left'); // calculator__operend--left 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
-const operator = document.querySelector('.calculator__operator'); // calculator__operator 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
-const secondOperend = document.querySelector('.calculator__operend--right'); // calculator__operend--right 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
-const calculatedResult = document.querySelector('.calculator__result'); // calculator__result 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
+let firstOperend = document.querySelector('.calculator__operend--left'); // calculator__operend--left 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
+let operator = document.querySelector('.calculator__operator'); // calculator__operator 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
+let secondOperend = document.querySelector('.calculator__operend--right'); // calculator__operend--right 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
+let calculatedResult = document.querySelector('.calculator__result'); // calculator__result 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 
 let num1 = '', num2 = ''; // 첫번째 두번째 숫자 변수를 저장한다.
 let boolNext = false; //첫번째 숫자가 끝나지 않을시 false, 두번째 숫자를 기록시 true
@@ -14,8 +14,6 @@ let stopOper = false;
 
 function calculate(n1, operator, n2) {
   let result = 0;
-  // TODO : n1과 n2를 operator에 따라 계산하는 함수를 만드세요.
-  // ex) 입력값이 n1 : '1', operator : '+', n2 : '2' 인 경우, 3이 리턴됩니다.
 
   if(operator === '+'){
     return (Number(n1) + Number(n2)).toString();
@@ -133,9 +131,7 @@ function deleteDot(numInput, numInd){ // 소수점이 중복되지 못하도록 
   }
 }
 
-// ! intermediate, advanced test를 위한 코드입니다. 도전하신다면 주석을 해제하세요.
-// const display = document.querySelector('.calculator__display--intermediate'); // calculator__display 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
-// let firstNum, intermediateOperator, previousKey, previousNum;
+
 
 buttons.addEventListener('click', function (event) {
   // 버튼을 눌렀을 때 작동하는 함수입니다.
@@ -143,9 +139,7 @@ buttons.addEventListener('click', function (event) {
   const target = event.target; // 클릭된 HTML 엘리먼트의 정보가 저장되어 있습니다.
   const action = target.classList[0]; // 클릭된 HTML 엘리먼트에 클레스 정보를 가져옵니다.
   const buttonContent = target.textContent; // 클릭된 HTML 엘리먼트의 텍스트 정보를 가져옵니다.
-  // ! 위 코드는 수정하지 마세요.
 
-  // ! 여기서부터 intermetiate & advanced 과제룰 풀어주세요.
   if (target.matches('button')) {
     if (action === 'number') { // 숫자를 누를시 인디게이터에 표시 한다.
       if(boolNext === false){ // 첫번째 숫자 입력
@@ -163,10 +157,6 @@ buttons.addEventListener('click', function (event) {
           console.log('num2 : ' + num2);
         } 
       }  
-        
-
-      
-      //num1 += document.querySelector('.calculator__display--intermediate').textContent
 
       console.log('if(action === ' + 'number) : ' + num1);
     }
@@ -247,3 +237,63 @@ buttons.addEventListener('click', function (event) {
   }
 
 });
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+  console.log("event works : ", event.key)
+  switch (event.key) {
+    case "0":
+      break;
+    case "1":
+      break;
+    case "2":
+      break;
+    case "3":
+      break;
+    case "4":
+      break;
+    case "5":
+    break;
+    case "6":
+      break;
+    case "7":
+      break;
+    case "8":
+      break;
+    case "9":
+      break;
+    case "1":
+      break;
+    case "+":
+
+      break;
+    case "-":
+      break;
+    case "*":
+      break;
+    case "/":
+      break;
+    case "Escape":
+      num1 = '';
+      num2 = '';
+      oper = '';
+      document.querySelector('.calculator__display--intermediate').textContent = '0';
+      boolNext = false;
+      stopOper = false;
+      count = 0;
+      break;
+    case "Enter":
+      // function calculate(n1, operator, n2)
+
+      break;
+    default:
+      return; // Quit when this doesn't handle the key event.
+  }
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
+}, true);
+// the last option dispatches the event to the listener first,
+// then dispatches event to window
